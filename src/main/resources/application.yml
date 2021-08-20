@@ -1,0 +1,25 @@
+server:
+  port: 9090
+#spring
+spring:
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/zeal-coder-test?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: root
+  flyway:
+    url: jdbc:mysql://localhost:3306/zeal-coder-test?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC
+    user: root
+    password: root
+    enabled: true
+#logging
+logging:
+  level:
+    root: info
+  file:
+    path: logging
+    max-size: 10MB
+    max-history: 7
