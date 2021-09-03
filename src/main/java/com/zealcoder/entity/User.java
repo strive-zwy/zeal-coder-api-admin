@@ -43,23 +43,6 @@ public class User extends RichEntity {
   private Long id;
 
   /**
-   */
-  @TableField(
-      value = "gmt_create",
-      insert = "now()"
-  )
-  private Long gmtCreate;
-
-  /**
-   */
-  @TableField(
-      value = "gmt_modified",
-      insert = "now()",
-      update = "now()"
-  )
-  private Long gmtModified;
-
-  /**
    * 账号
    */
   @TableField("account")
@@ -70,6 +53,16 @@ public class User extends RichEntity {
    */
   @TableField("avatar")
   private String avatar;
+
+  /**
+   */
+  @TableField("gmt_create")
+  private Long gmtCreate;
+
+  /**
+   */
+  @TableField("gmt_modified")
+  private Long gmtModified;
 
   /**
    * 选项凭证

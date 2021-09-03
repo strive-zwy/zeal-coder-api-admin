@@ -45,23 +45,6 @@ public class Blog extends RichEntity {
   private Long id;
 
   /**
-   */
-  @TableField(
-      value = "gmt_create",
-      insert = "now()"
-  )
-  private Long gmtCreate;
-
-  /**
-   */
-  @TableField(
-      value = "gmt_modified",
-      insert = "now()",
-      update = "now()"
-  )
-  private Long gmtModified;
-
-  /**
    * 是否已删除 0-false 1-true
    */
   @TableField(
@@ -88,6 +71,22 @@ public class Blog extends RichEntity {
    */
   @TableField("description")
   private String description;
+
+  /**
+   * 博客描述
+   */
+  @TableField("explain")
+  private String explain;
+
+  /**
+   */
+  @TableField("gmt_create")
+  private Long gmtCreate;
+
+  /**
+   */
+  @TableField("gmt_modified")
+  private Long gmtModified;
 
   /**
    * 点赞数量

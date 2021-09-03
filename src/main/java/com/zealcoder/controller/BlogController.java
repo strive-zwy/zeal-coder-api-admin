@@ -9,10 +9,13 @@ import com.zealcoder.exception.ResultBody;
 import com.zealcoder.mapper.BlogMapper;
 import com.zealcoder.wrapper.BlogQuery;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,7 +34,7 @@ public class BlogController {
     private BlogMapper blogMapper;
 
     @GetMapping(value = "/getAllBlog")
-    public ResultBody getAllBlog(@RequestBody SearchDTO search){
+    public ResultBody getAllBlog(@Validated SearchDTO search){
         BlogQuery blogQuery = new BlogQuery();
         blogQuery.limit(search.getPage(),search.getSize())
                 .orderBy.gmtCreate().desc().end();
@@ -43,10 +46,22 @@ public class BlogController {
         }
         int total = blogMapper.count(blogQuery);
         List<Blog> list = blogMapper.listEntity(blogQuery);
-        PageDTO<Blog> pageDTO = new PageDTO<>();
-        pageDTO.setList(list);
+        List<BlogDTO> blogDTOS = new ArrayList<>();
+        list.forEach(blog -> {
+            BlogDTO blogDTO = new BlogDTO();
+            BeanUtils.copyProperties(blog,blogDTO);
+            blogDTOS.add(blogDTO);
+        });
+        PageDTO<BlogDTO> pageDTO = new PageDTO<>();
+        pageDTO.setList(blogDTOS);
         pageDTO.setPagination(total,search.getPage(),search.getSize());
         return ResultBody.success(pageDTO);
+    }
+
+    @GetMapping(value = "/getBlogById")
+    public ResultBody getBlogById(@Validated Long id){
+        Blog blog = blogMapper.findById(id);
+        return ResultBody.success(blog);
     }
 
     @PostMapping(value = "/insert")

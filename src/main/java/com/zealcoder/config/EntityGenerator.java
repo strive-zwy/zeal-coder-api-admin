@@ -30,7 +30,8 @@ public class EntityGenerator {
         // 设置dao接口和实现的src目录, 相对于 user.dir
         daoDir = "src/main/java",
         //如果表定义记录创建，记录修改，逻辑删除字段
-        gmtCreated = "gmt_create", gmtModified = "gmt_modified", logicDeleted = "is_deleted",
+        /*gmtCreated = "gmt_create", gmtModified = "gmt_modified",*/
+            logicDeleted = "is_deleted",
         // 设置哪些表要生成Entity文件
         tables = {
                 @Table(value = {"blog","comment","user","message"})

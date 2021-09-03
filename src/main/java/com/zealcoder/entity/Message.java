@@ -42,23 +42,6 @@ public class Message extends RichEntity {
   private Long id;
 
   /**
-   */
-  @TableField(
-      value = "gmt_create",
-      insert = "now()"
-  )
-  private Long gmtCreate;
-
-  /**
-   */
-  @TableField(
-      value = "gmt_modified",
-      insert = "now()",
-      update = "now()"
-  )
-  private Long gmtModified;
-
-  /**
    * 留言内容
    */
   @TableField("content")
@@ -69,6 +52,16 @@ public class Message extends RichEntity {
    */
   @TableField("creator")
   private Long creator;
+
+  /**
+   */
+  @TableField("gmt_create")
+  private Long gmtCreate;
+
+  /**
+   */
+  @TableField("gmt_modified")
+  private Long gmtModified;
 
   @Override
   public Serializable findPk() {

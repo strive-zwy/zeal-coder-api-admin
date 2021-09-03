@@ -14,6 +14,7 @@ public class BlogDTO {
     private Long id;
     private String title;
     private String tag;
+    private String explain;
     private String cover;
     private String description;
 }

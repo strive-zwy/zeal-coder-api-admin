@@ -17,6 +17,7 @@
         <java.version>1.8</java.version>
         <fluent-mybatis.version>1.6.14</fluent-mybatis.version>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.flywaydb</groupId>
@@ -61,17 +62,17 @@
             <version>${fluent-mybatis.version}</version>
         </dependency>
         <!--Shiro-->
-        <!--<dependency>
+        <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-spring-boot-starter</artifactId>
             <version>1.5.3</version>
-        </dependency>-->
+        </dependency>
         <!--JWT-->
-        <!--<dependency>
+        <dependency>
             <groupId>com.auth0</groupId>
             <artifactId>java-jwt</artifactId>
             <version>3.4.0</version>
-        </dependency>-->
+        </dependency>
         <!--JPA-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -98,6 +99,17 @@
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
         </dependency>
+        <!--okhttp3-->
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>4.9.0</version>
+        </dependency>
+<!--        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.75</version>
+        </dependency>-->
 
     </dependencies>
 

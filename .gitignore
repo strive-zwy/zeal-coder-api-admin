@@ -34,3 +34,6 @@ build/
 
 ### logging ###
 logging/**
+
+### 配置文件 ###
+.yml

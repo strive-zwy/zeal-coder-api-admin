@@ -43,23 +43,6 @@ public class Comment extends RichEntity {
   private Long id;
 
   /**
-   */
-  @TableField(
-      value = "gmt_create",
-      insert = "now()"
-  )
-  private Long gmtCreate;
-
-  /**
-   */
-  @TableField(
-      value = "gmt_modified",
-      insert = "now()",
-      update = "now()"
-  )
-  private Long gmtModified;
-
-  /**
    * 博客id
    */
   @TableField("blog_id")
@@ -78,10 +61,20 @@ public class Comment extends RichEntity {
   private String content;
 
   /**
+   */
+  @TableField("gmt_create")
+  private Long gmtCreate;
+
+  /**
+   */
+  @TableField("gmt_modified")
+  private Long gmtModified;
+
+  /**
    * 父级id
    */
   @TableField("parent_id")
-  private Integer parentId;
+  private Long parentId;
 
   /**
    * 评论类型 0-博客的评论 1-评论的评论

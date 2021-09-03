@@ -9,9 +9,9 @@ package com.zealcoder.enums;
 public enum UserLoginEnums {
 
     LOGIN_GITHUB(0,"github用户登录"),
-    LOGIN_USER(0,"普通用户登录");
+    LOGIN_USER(1,"普通用户登录");
 
-    private int type;
+    private Integer type;
     private String des;
 
     public int getType() {
