@@ -11,6 +11,7 @@ import com.zealcoder.github.GithubUser;
 import com.zealcoder.mapper.UserMapper;
 import com.zealcoder.shiroJWT.JwtToken;
 import com.zealcoder.shiroJWT.JwtUtil;
+import com.zealcoder.utils.EmailUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.ExpiredCredentialsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -50,6 +51,8 @@ public class AuthorController {
     @Qualifier("userMapper")
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private EmailUtils emailUtils;
 
     @GetMapping("/callback")
     public ResultBody githubAuthCallback(@RequestParam("code") String code,
@@ -67,13 +70,26 @@ public class AuthorController {
         return ResultBody.success(u);
     }
 
-    @PostMapping(value = "/doRegister")
-    public ResultBody register(@RequestBody LoginDTO loginDTO){
+    @PostMapping("sendEmail")
+    @ResponseBody
+    public ResultBody sendEmail(String email, HttpSession session) {
+        emailUtils.sendMail(email, session);
+        return ResultBody.success("验证码发送成功！");
+    }
+
+    @PostMapping(value = "/register")
+    public ResultBody register(@RequestBody LoginDTO loginDTO, HttpSession session){
+        //        获取session中的验证信息
+        String email = (String) session.getAttribute("email");
+        String code = (String) session.getAttribute("code");
+        if (!(loginDTO.getEmail().equals(email) && loginDTO.getCode().equals(code))) {
+            return ResultBody.error("-1","验证码错误");
+        }
         User old = userMapper.findOne(
                 userMapper.query().where.account().eq(loginDTO.getAccount()).end()
         );
         if (old != null) {
-            throw new BizException("-1", "该账号已注册");
+            return ResultBody.error("-1","该账号已注册");
         }
         User user = new User();
         String hash = "MD5";
@@ -85,6 +101,7 @@ public class AuthorController {
         user.setAccount(loginDTO.getAccount())
         .setJwtToken(token)
         .setSecret(secret)
+        .setEmail(loginDTO.getEmail())
         .setGmtCreate(gmtCreat)
         .setGmtModified(gmtCreat)
         .setAvatar(DEFAULT_AVATAR)

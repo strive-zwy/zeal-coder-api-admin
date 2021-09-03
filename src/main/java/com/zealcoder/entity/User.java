@@ -55,6 +55,12 @@ public class User extends RichEntity {
   private String avatar;
 
   /**
+   * 用户邮箱，一个邮箱仅限一个用户注册
+   */
+  @TableField("email")
+  private String email;
+
+  /**
    */
   @TableField("gmt_create")
   private Long gmtCreate;
